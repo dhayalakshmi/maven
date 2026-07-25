@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>main.html</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="generator" content="SynEdit HTML exporter" />
+<style type="text/css">
+<!--
+body { color: #000000; background-color: #FFFFFF; }
+.cpp1-assembler { color: #0000FF; }
+.cpp1-character { color: #000000; }
+.cpp1-comment { color: #0078D7; font-style: italic; }
+.cpp1-float { color: #800080; }
+.cpp1-hexadecimal { color: #800080; }
+.cpp1-identifier { color: #000000; }
+.cpp1-illegalchar { color: #000000; }
+.cpp1-number { color: #800080; }
+.cpp1-octal { color: #800080; }
+.cpp1-preprocessor { color: #008000; }
+.cpp1-reservedword { color: #000000; font-weight: bold; }
+.cpp1-space { background-color: #FFFFFF; color: #000000; }
+.cpp1-string { color: #0000FF; font-weight: bold; }
+.cpp1-symbol { color: #FF0000; font-weight: bold; }
+-->
+</style>
+</head>
+<body>
+<pre>
+<code><span style="font: 10pt Consolas;"><span class="cpp1-preprocessor">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+</span><span class="cpp1-reservedword">struct</span><span class="cpp1-space"> CNode </span><span class="cpp1-symbol">{
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> data</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">struct</span><span class="cpp1-space"> CNode</span><span class="cpp1-symbol">*</span><span class="cpp1-space"> next</span><span class="cpp1-symbol">;
+};
+
+</span><span class="cpp1-reservedword">struct</span><span class="cpp1-space"> CNode</span><span class="cpp1-symbol">*</span><span class="cpp1-space"> head </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> NULL</span><span class="cpp1-symbol">;
+
+</span><span class="cpp1-comment">// Function to create a new node
+</span><span class="cpp1-reservedword">struct</span><span class="cpp1-space"> CNode</span><span class="cpp1-symbol">*</span><span class="cpp1-space"> createNode</span><span class="cpp1-symbol">(</span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> value</span><span class="cpp1-symbol">)</span><span class="cpp1-space"> </span><span class="cpp1-symbol">{
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">struct</span><span class="cpp1-space"> CNode</span><span class="cpp1-symbol">*</span><span class="cpp1-space"> newNode </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(</span><span class="cpp1-reservedword">struct</span><span class="cpp1-space"> CNode</span><span class="cpp1-symbol">*)</span><span class="cpp1-identifier">malloc</span><span class="cpp1-symbol">(</span><span class="cpp1-reservedword">sizeof</span><span class="cpp1-symbol">(</span><span class="cpp1-reservedword">struct</span><span class="cpp1-space"> CNode</span><span class="cpp1-symbol">));
+</span><span class="cpp1-space">    newNode</span><span class="cpp1-symbol">-&gt;</span><span class="cpp1-identifier">data </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> value</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">    newNode</span><span class="cpp1-symbol">-&gt;</span><span class="cpp1-identifier">next </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> NULL</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">return</span><span class="cpp1-space"> newNode</span><span class="cpp1-symbol">;
+}
+
+</span><span class="cpp1-comment">// Insert at the beginning
+</span><span class="cpp1-reservedword">void</span><span class="cpp1-space"> insertAtBeginning</span><span class="cpp1-symbol">(</span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> value</span><span class="cpp1-symbol">)</span><span class="cpp1-space"> </span><span class="cpp1-symbol">{
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">struct</span><span class="cpp1-space"> CNode</span><span class="cpp1-symbol">*</span><span class="cpp1-space"> newNode </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> createNode</span><span class="cpp1-symbol">(</span><span class="cpp1-identifier">value</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">if</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(</span><span class="cpp1-identifier">head </span><span class="cpp1-symbol">==</span><span class="cpp1-space"> NULL</span><span class="cpp1-symbol">)</span><span class="cpp1-space"> </span><span class="cpp1-symbol">{
+</span><span class="cpp1-space">        head </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> newNode</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">        newNode</span><span class="cpp1-symbol">-&gt;</span><span class="cpp1-identifier">next </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> head</span><span class="cpp1-symbol">;</span><span class="cpp1-space"> </span><span class="cpp1-comment">// Points to itself (circular)
+</span><span class="cpp1-space">    </span><span class="cpp1-symbol">}</span><span class="cpp1-space"> </span><span class="cpp1-reservedword">else</span><span class="cpp1-space"> </span><span class="cpp1-symbol">{
+</span><span class="cpp1-space">        </span><span class="cpp1-reservedword">struct</span><span class="cpp1-space"> CNode</span><span class="cpp1-symbol">*</span><span class="cpp1-space"> temp </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> head</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">        </span><span class="cpp1-reservedword">while</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(</span><span class="cpp1-identifier">temp</span><span class="cpp1-symbol">-&gt;</span><span class="cpp1-identifier">next </span><span class="cpp1-symbol">!=</span><span class="cpp1-space"> head</span><span class="cpp1-symbol">)</span><span class="cpp1-space"> </span><span class="cpp1-symbol">{
+</span><span class="cpp1-space">            temp </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> temp</span><span class="cpp1-symbol">-&gt;</span><span class="cpp1-identifier">next</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">        </span><span class="cpp1-symbol">}
+</span><span class="cpp1-space">        newNode</span><span class="cpp1-symbol">-&gt;</span><span class="cpp1-identifier">next </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> head</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">        temp</span><span class="cpp1-symbol">-&gt;</span><span class="cpp1-identifier">next </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> newNode</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">        head </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> newNode</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">    </span><span class="cpp1-symbol">}
+</span><span class="cpp1-space">    printf</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;%d inserted at the beginning.\n&quot;</span><span class="cpp1-symbol">,</span><span class="cpp1-space"> value</span><span class="cpp1-symbol">);
+}
+
+</span><span class="cpp1-comment">// Insert at the end
+</span><span class="cpp1-reservedword">void</span><span class="cpp1-space"> insertAtEnd</span><span class="cpp1-symbol">(</span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> value</span><span class="cpp1-symbol">)</span><span class="cpp1-space"> </span><span class="cpp1-symbol">{
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">struct</span><span class="cpp1-space"> CNode</span><span class="cpp1-symbol">*</span><span class="cpp1-space"> newNode </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> createNode</span><span class="cpp1-symbol">(</span><span class="cpp1-identifier">value</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">if</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(</span><span class="cpp1-identifier">head </span><span class="cpp1-symbol">==</span><span class="cpp1-space"> NULL</span><span class="cpp1-symbol">)</span><span class="cpp1-space"> </span><span class="cpp1-symbol">{
+</span><span class="cpp1-space">        head </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> newNode</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">        newNode</span><span class="cpp1-symbol">-&gt;</span><span class="cpp1-identifier">next </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> head</span><span class="cpp1-symbol">;</span><span class="cpp1-space"> </span><span class="cpp1-comment">// Points to itself (circular)
+</span><span class="cpp1-space">    </span><span class="cpp1-symbol">}</span><span class="cpp1-space"> </span><span class="cpp1-reservedword">else</span><span class="cpp1-space"> </span><span class="cpp1-symbol">{
+</span><span class="cpp1-space">        </span><span class="cpp1-reservedword">struct</span><span class="cpp1-space"> CNode</span><span class="cpp1-symbol">*</span><span class="cpp1-space"> temp </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> head</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">        </span><span class="cpp1-reservedword">while</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(</span><span class="cpp1-identifier">temp</span><span class="cpp1-symbol">-&gt;</span><span class="cpp1-identifier">next </span><span class="cpp1-symbol">!=</span><span class="cpp1-space"> head</span><span class="cpp1-symbol">)</span><span class="cpp1-space"> </span><span class="cpp1-symbol">{
+</span><span class="cpp1-space">            temp </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> temp</span><span class="cpp1-symbol">-&gt;</span><span class="cpp1-identifier">next</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">        </span><span class="cpp1-symbol">}
+</span><span class="cpp1-space">        temp</span><span class="cpp1-symbol">-&gt;</span><span class="cpp1-identifier">next </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> newNode</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">        newNode</span><span class="cpp1-symbol">-&gt;</span><span class="cpp1-identifier">next </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> head</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">    </span><span class="cpp1-symbol">}
+</span><span class="cpp1-space">    printf</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;%d inserted at the end.\n&quot;</span><span class="cpp1-symbol">,</span><span class="cpp1-space"> value</span><span class="cpp1-symbol">);
+}
+
+</span><span class="cpp1-comment">// Delete from the beginning
+</span><span class="cpp1-reservedword">void</span><span class="cpp1-space"> deleteFromBeginning</span><span class="cpp1-symbol">()</span><span class="cpp1-space"> </span><span class="cpp1-symbol">{
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">if</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(</span><span class="cpp1-identifier">head </span><span class="cpp1-symbol">==</span><span class="cpp1-space"> NULL</span><span class="cpp1-symbol">)</span><span class="cpp1-space"> </span><span class="cpp1-symbol">{
+</span><span class="cpp1-space">        printf</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;List is empty!\n&quot;</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">        </span><span class="cpp1-reservedword">return</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">    </span><span class="cpp1-symbol">}
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">struct</span><span class="cpp1-space"> CNode</span><span class="cpp1-symbol">*</span><span class="cpp1-space"> temp </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> head</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">if</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(</span><span class="cpp1-identifier">head</span><span class="cpp1-symbol">-&gt;</span><span class="cpp1-identifier">next </span><span class="cpp1-symbol">==</span><span class="cpp1-space"> head</span><span class="cpp1-symbol">)</span><span class="cpp1-space"> </span><span class="cpp1-symbol">{</span><span class="cpp1-space"> </span><span class="cpp1-comment">// Only one node
+</span><span class="cpp1-space">        printf</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;%d deleted from the beginning.\n&quot;</span><span class="cpp1-symbol">,</span><span class="cpp1-space"> head</span><span class="cpp1-symbol">-&gt;</span><span class="cpp1-identifier">data</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">        free</span><span class="cpp1-symbol">(</span><span class="cpp1-identifier">head</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">        head </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> NULL</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">    </span><span class="cpp1-symbol">}</span><span class="cpp1-space"> </span><span class="cpp1-reservedword">else</span><span class="cpp1-space"> </span><span class="cpp1-symbol">{
+</span><span class="cpp1-space">        </span><span class="cpp1-reservedword">struct</span><span class="cpp1-space"> CNode</span><span class="cpp1-symbol">*</span><span class="cpp1-space"> last </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> head</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">        </span><span class="cpp1-reservedword">while</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(</span><span class="cpp1-identifier">last</span><span class="cpp1-symbol">-&gt;</span><span class="cpp1-identifier">next </span><span class="cpp1-symbol">!=</span><span class="cpp1-space"> head</span><span class="cpp1-symbol">)</span><span class="cpp1-space"> </span><span class="cpp1-symbol">{
+</span><span class="cpp1-space">            last </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> last</span><span class="cpp1-symbol">-&gt;</span><span class="cpp1-identifier">next</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">        </span><span class="cpp1-symbol">}
+</span><span class="cpp1-space">        head </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> head</span><span class="cpp1-symbol">-&gt;</span><span class="cpp1-identifier">next</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">        last</span><span class="cpp1-symbol">-&gt;</span><span class="cpp1-identifier">next </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> head</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">        printf</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;%d deleted from the beginning.\n&quot;</span><span class="cpp1-symbol">,</span><span class="cpp1-space"> temp</span><span class="cpp1-symbol">-&gt;</span><span class="cpp1-identifier">data</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">        free</span><span class="cpp1-symbol">(</span><span class="cpp1-identifier">temp</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">    </span><span class="cpp1-symbol">}
+}
+
+</span><span class="cpp1-comment">// Delete from the end
+</span><span class="cpp1-reservedword">void</span><span class="cpp1-space"> deleteFromEnd</span><span class="cpp1-symbol">()</span><span class="cpp1-space"> </span><span class="cpp1-symbol">{
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">if</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(</span><span class="cpp1-identifier">head </span><span class="cpp1-symbol">==</span><span class="cpp1-space"> NULL</span><span class="cpp1-symbol">)</span><span class="cpp1-space"> </span><span class="cpp1-symbol">{
+</span><span class="cpp1-space">        printf</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;List is empty!\n&quot;</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">        </span><span class="cpp1-reservedword">return</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">    </span><span class="cpp1-symbol">}
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">struct</span><span class="cpp1-space"> CNode</span><span class="cpp1-symbol">*</span><span class="cpp1-space"> temp </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> head</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">struct</span><span class="cpp1-space"> CNode</span><span class="cpp1-symbol">*</span><span class="cpp1-space"> prev </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> NULL</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">if</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(</span><span class="cpp1-identifier">head</span><span class="cpp1-symbol">-&gt;</span><span class="cpp1-identifier">next </span><span class="cpp1-symbol">==</span><span class="cpp1-space"> head</span><span class="cpp1-symbol">)</span><span class="cpp1-space"> </span><span class="cpp1-symbol">{</span><span class="cpp1-space"> </span><span class="cpp1-comment">// Only one node
+</span><span class="cpp1-space">        printf</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;%d deleted from the end.\n&quot;</span><span class="cpp1-symbol">,</span><span class="cpp1-space"> head</span><span class="cpp1-symbol">-&gt;</span><span class="cpp1-identifier">data</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">        free</span><span class="cpp1-symbol">(</span><span class="cpp1-identifier">head</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">        head </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> NULL</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">    </span><span class="cpp1-symbol">}</span><span class="cpp1-space"> </span><span class="cpp1-reservedword">else</span><span class="cpp1-space"> </span><span class="cpp1-symbol">{
+</span><span class="cpp1-space">        </span><span class="cpp1-reservedword">while</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(</span><span class="cpp1-identifier">temp</span><span class="cpp1-symbol">-&gt;</span><span class="cpp1-identifier">next </span><span class="cpp1-symbol">!=</span><span class="cpp1-space"> head</span><span class="cpp1-symbol">)</span><span class="cpp1-space"> </span><span class="cpp1-symbol">{
+</span><span class="cpp1-space">            prev </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> temp</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">            temp </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> temp</span><span class="cpp1-symbol">-&gt;</span><span class="cpp1-identifier">next</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">        </span><span class="cpp1-symbol">}
+</span><span class="cpp1-space">        prev</span><span class="cpp1-symbol">-&gt;</span><span class="cpp1-identifier">next </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> head</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">        printf</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;%d deleted from the end.\n&quot;</span><span class="cpp1-symbol">,</span><span class="cpp1-space"> temp</span><span class="cpp1-symbol">-&gt;</span><span class="cpp1-identifier">data</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">        free</span><span class="cpp1-symbol">(</span><span class="cpp1-identifier">temp</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">    </span><span class="cpp1-symbol">}
+}
+
+</span><span class="cpp1-comment">// Display the circular linked list
+</span><span class="cpp1-reservedword">void</span><span class="cpp1-space"> displayList</span><span class="cpp1-symbol">()</span><span class="cpp1-space"> </span><span class="cpp1-symbol">{
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">if</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(</span><span class="cpp1-identifier">head </span><span class="cpp1-symbol">==</span><span class="cpp1-space"> NULL</span><span class="cpp1-symbol">)</span><span class="cpp1-space"> </span><span class="cpp1-symbol">{
+</span><span class="cpp1-space">        printf</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;List is empty.\n&quot;</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">        </span><span class="cpp1-reservedword">return</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">    </span><span class="cpp1-symbol">}
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">struct</span><span class="cpp1-space"> CNode</span><span class="cpp1-symbol">*</span><span class="cpp1-space"> temp </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> head</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">    printf</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;Circular Linked List: &quot;</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">do</span><span class="cpp1-space"> </span><span class="cpp1-symbol">{
+</span><span class="cpp1-space">        printf</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;%d -&gt; &quot;</span><span class="cpp1-symbol">,</span><span class="cpp1-space"> temp</span><span class="cpp1-symbol">-&gt;</span><span class="cpp1-identifier">data</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">        temp </span><span class="cpp1-symbol">=</span><span class="cpp1-space"> temp</span><span class="cpp1-symbol">-&gt;</span><span class="cpp1-identifier">next</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">    </span><span class="cpp1-symbol">}</span><span class="cpp1-space"> </span><span class="cpp1-reservedword">while</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(</span><span class="cpp1-identifier">temp </span><span class="cpp1-symbol">!=</span><span class="cpp1-space"> head</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">    printf</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;(back to head)\n&quot;</span><span class="cpp1-symbol">);
+}
+
+</span><span class="cpp1-comment">// Main function (Menu-driven)
+</span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> main</span><span class="cpp1-symbol">()</span><span class="cpp1-space"> </span><span class="cpp1-symbol">{
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> choice</span><span class="cpp1-symbol">,</span><span class="cpp1-space"> value</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">while</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(</span><span class="cpp1-number">1</span><span class="cpp1-symbol">)</span><span class="cpp1-space"> </span><span class="cpp1-symbol">{
+</span><span class="cpp1-space">        printf</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;\nCircular Linked List Operations:\n&quot;</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">        printf</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;1. Insert at Beginning\n2. Insert at End\n&quot;</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">        printf</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;3. Delete from Beginning\n4. Delete from End\n&quot;</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">        printf</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;5. Display List\n6. Exit\n&quot;</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">        printf</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;Enter your choice: &quot;</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">        scanf</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;%d&quot;</span><span class="cpp1-symbol">,</span><span class="cpp1-space"> </span><span class="cpp1-symbol">&amp;</span><span class="cpp1-identifier">choice</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">        </span><span class="cpp1-reservedword">switch</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(</span><span class="cpp1-identifier">choice</span><span class="cpp1-symbol">)</span><span class="cpp1-space"> </span><span class="cpp1-symbol">{
+</span><span class="cpp1-space">            </span><span class="cpp1-reservedword">case</span><span class="cpp1-space"> </span><span class="cpp1-number">1</span><span class="cpp1-symbol">:
+</span><span class="cpp1-space">                printf</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;Enter value to insert: &quot;</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">                scanf</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;%d&quot;</span><span class="cpp1-symbol">,</span><span class="cpp1-space"> </span><span class="cpp1-symbol">&amp;</span><span class="cpp1-identifier">value</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">                insertAtBeginning</span><span class="cpp1-symbol">(</span><span class="cpp1-identifier">value</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">                </span><span class="cpp1-reservedword">break</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">            </span><span class="cpp1-reservedword">case</span><span class="cpp1-space"> </span><span class="cpp1-number">2</span><span class="cpp1-symbol">:
+</span><span class="cpp1-space">                printf</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;Enter value to insert: &quot;</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">                scanf</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;%d&quot;</span><span class="cpp1-symbol">,</span><span class="cpp1-space"> </span><span class="cpp1-symbol">&amp;</span><span class="cpp1-identifier">value</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">                insertAtEnd</span><span class="cpp1-symbol">(</span><span class="cpp1-identifier">value</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">                </span><span class="cpp1-reservedword">break</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">            </span><span class="cpp1-reservedword">case</span><span class="cpp1-space"> </span><span class="cpp1-number">3</span><span class="cpp1-symbol">:
+</span><span class="cpp1-space">                deleteFromBeginning</span><span class="cpp1-symbol">();
+</span><span class="cpp1-space">                </span><span class="cpp1-reservedword">break</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">            </span><span class="cpp1-reservedword">case</span><span class="cpp1-space"> </span><span class="cpp1-number">4</span><span class="cpp1-symbol">:
+</span><span class="cpp1-space">                deleteFromEnd</span><span class="cpp1-symbol">();
+</span><span class="cpp1-space">                </span><span class="cpp1-reservedword">break</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">            </span><span class="cpp1-reservedword">case</span><span class="cpp1-space"> </span><span class="cpp1-number">5</span><span class="cpp1-symbol">:
+</span><span class="cpp1-space">                displayList</span><span class="cpp1-symbol">();
+</span><span class="cpp1-space">                </span><span class="cpp1-reservedword">break</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">            </span><span class="cpp1-reservedword">case</span><span class="cpp1-space"> </span><span class="cpp1-number">6</span><span class="cpp1-symbol">:
+</span><span class="cpp1-space">                exit</span><span class="cpp1-symbol">(</span><span class="cpp1-number">0</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">            </span><span class="cpp1-reservedword">default</span><span class="cpp1-symbol">:
+</span><span class="cpp1-space">                printf</span><span class="cpp1-symbol">(</span><span class="cpp1-string">&quot;Invalid choice!\n&quot;</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">        </span><span class="cpp1-symbol">}
+</span><span class="cpp1-space">    </span><span class="cpp1-symbol">}
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">return</span><span class="cpp1-space"> </span><span class="cpp1-number">0</span><span class="cpp1-symbol">;
+}
+</span></span>
+</code></pre>
+</body>
+</html>
