@@ -7,6 +7,6 @@ public class Calculator {
 
     public static void main(String[] args) {
         Calculator c = new Calculator();
-        System.out.println("Sum = " + c.add(10, 20));
+        System.out.println("Sum = " + c.add(30, 40));
     }
 }
